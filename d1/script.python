@@ -1,0 +1,25 @@
+with open("sequence.txt", "r") as f:
+    lines = [line.rstrip("\n") for line in f]
+
+code = 0
+dial = 50
+
+print(f"The dial starts at {dial}.")
+
+for line in lines:
+    direction = line[0]
+    ticks = int(line[1:]) % 100
+
+    dial += ticks if direction is "R" else -ticks
+
+    if dial < 0:
+        dial += 100
+    elif dial >= 100:
+        dial -= 100
+
+    if dial is 0:
+        code += 1
+
+    print(f"The dial is rotated {line} to point at {dial}.")
+
+print( f"The code for the lock is {code}!")
